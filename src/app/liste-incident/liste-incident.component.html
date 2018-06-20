@@ -7,14 +7,14 @@
             <div class="col">
               <table class="table">
                 <thead>
-                <th scope="col">Id</th>
-                <th scope="col">Title</th>
-                <th scope="col">Level</th>
-                <th scope="col">Type</th>
-                <th scope="col">Progress</th>
-                <th scope="col">Updated on</th>
-                <th scope="col">Created on</th>
-                <th scope="col">Action</th>
+                  <th scope="col">Id</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Level</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Progress</th>
+                  <th scope="col">Updated on</th>
+                  <th scope="col">Created on</th>
+                  <th scope="col">Action</th>
                 </thead>
                 <tbody>
                 <tr *ngFor="let incident of incidentsOuverts" app-incident [incident]="incident" (sortie)="updateValue($event)"></tr>
@@ -37,14 +37,14 @@
             <div class="col">
               <table class="table">
                 <thead>
-                <th scope="col">Id</th>
-                <th scope="col">Title</th>
-                <th scope="col">Level</th>
-                <th scope="col">Type</th>
-                <th scope="col">Progress</th>
-                <th scope="col">Updated on</th>
-                <th scope="col">Created on</th>
-                <th scope="col">Action</th>
+                  <th scope="col">Id</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Level</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Progress</th>
+                  <th scope="col">Updated on</th>
+                  <th scope="col">Created on</th>
+                  <th scope="col">Action</th>
                 </thead>
                 <tbody>
                 <tr *ngFor="let incident of incidentsClos" app-incident-clos [incident]="incident" (sortie)="updateValue($event)">
