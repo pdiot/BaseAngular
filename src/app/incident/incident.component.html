@@ -1,0 +1,20 @@
+<th scope=row>{{incident.id}}</th>
+<td>{{incident.titre}}</td>
+<td>{{incident.level}}</td>
+<td>{{incident.type}}</td>
+<td><ngb-progressbar type={{incident.progressType}} [value]="incident.progress" [striped]="true" [animated]="true"><i class="progression">{{incident.progress}}%</i></ngb-progressbar></td>
+
+<td *ngIf="incident.dateModification == null">Pas encore de modification</td>
+<td *ngIf="incident.dateModification != null">{{incident.dateModification.toLocaleDateString('fr-FR',
+  { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}}</td>
+<td *ngIf="incident.dateCreation == null">Pas de création ? Ok.</td>
+<td *ngIf="incident.dateCreation != null">{{incident.dateCreation.toLocaleDateString('fr-FR',
+  { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}}</td>
+<td>
+  <div class="row">
+    <div class="col">
+      <button type="button" class="btn btn-danger">Edit</button>
+      <a type="button" class="btn btn-info" href="/incident/{{incident.id}}">Details</a>
+    </div>
+  </div>
+</td>

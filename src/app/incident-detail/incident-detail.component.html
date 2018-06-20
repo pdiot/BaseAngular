@@ -1,0 +1,9 @@
+<div class="card" *ngIf="incident">
+  <div class="card-header">
+    <div class="card-title">{{incident.titre}}</div>
+  </div>
+  <div class="card-body">
+    <span>{{incident.description}}</span>
+  </div>
+  <button type="button" class="btn btn-outline-dark" (click)="goBack()">Go Back</button>
+</div>

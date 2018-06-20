@@ -1,0 +1,82 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title"><h2>Incident</h2></div>
+  </div>
+  <div class="card-body">
+    <div *ngIf="!incidentForm.valid && formSubmitted">
+      <div class="affichageErreurs card text-white bg-danger mb-3">
+        <div class="card-body" *ngIf="incidentForm.controls['titre'].hasError('required')"> Le nom de l'incident est obligatoire.</div>
+        <div class="card-body" *ngIf="incidentForm.controls['titre'].hasError('minlength')"> Le nom de l'incident doit faire au moins 3 caractères.</div>
+      </div>
+      <div class="affichageErreurs card text-white bg-danger mb-3">
+        <div class="card-body" *ngIf="incidentForm.controls['mail'].hasError('required')"> L'email est obligatoire.</div>
+      </div>
+      <div class="affichageErreurs card text-white bg-danger mb-3">
+        <div class="card-body" *ngIf="incidentForm.controls['progress'].hasError('required')"> La progression est obligatoire.</div>
+      </div>
+      <div class="affichageErreurs card text-white bg-danger mb-3">
+        <div class="card-body" *ngIf="incidentForm.controls['level'].hasError('required')"> Le niveau de l'incident est obligatoire.</div>
+        <div class="card-body" *ngIf="incidentForm.controls['level'].hasError('min') || incidentForm.controls['level'].hasError('max')"> Le niveau de l'incident doit être compris entre 0 et 3.</div>
+      </div>
+      <div class="affichageErreurs card text-white bg-danger mb-3">
+        <div class="card-body" *ngIf="incidentForm.controls['type'].hasError('required')"> Le type de l'incident est obligatoire.</div>
+        <div class="card-body" *ngIf="incidentForm.controls['type'].hasError('min') || incidentForm.controls['type'].hasError('max')"> Le type de l'incident doit être compris entre 0 et 1.</div>
+      </div>
+    </div>
+    <form [formGroup]="incidentForm" (ngSubmit)="submitForm()">
+      <div style="visibility: hidden" class="form-group">
+        <input type="text" class="form-control" id="inputId" formControlName="id">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputTitre">Titre</label>
+          <input type="text" class="form-control" id="inputTitre" placeholder="Titre de l'incident" formControlName="titre">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputLevel">Level</label>
+          <select type="number" class="form-control" id="inputLevel" placeholder="Niveau de l'incident" formControlName="level">
+            <option value="0">BUG</option>
+            <option value="1">FEATURE</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md">
+          <label for="inputMail">E-Mail</label>
+          <input type="email" class="form-control" id="inputMail" placeholder="E-mail" formControlName="mail">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md">
+          <label for="inputDesc">Description</label>
+          <input type="text" class="form-control" id="inputDesc" placeholder="Description de l'incident" formControlName="desc">
+        </div>
+        <div class="form-group col-md">
+          <label for="inputDesc">Type</label>
+          <select type="number" class="form-control" id="inputType" placeholder="Description de l'incident" formControlName="type">
+            <option value="0">FATAL</option>
+            <option value="1">ERROR</option>
+            <option value="2">MAJOR</option>
+            <option value="3">MINOR</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md">
+          <label for="inputProgress">Progress</label>
+          <input type="range" class="form-control-range" id="inputProgress" formControlName="progress" min="0" max="100" list="tickmarks">
+          <datalist id="tickmarks">
+            <option value="0" label="0%">
+            <option value="25">
+            <option value="50" label="50%">
+            <option value="75">
+            <option value="100" label="100%">
+          </datalist>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-dark">Add</button>
+    </form>
+  </div>
+</div>
+
+

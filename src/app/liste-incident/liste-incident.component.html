@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+      <h2>Incidents</h2>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Level</th>
+          <th scope="col">Type</th>
+          <th scope="col">Progress</th>
+          <th scope="col">Updated on</th>
+          <th scope="col">Created on</th>
+          <th scope="col">Action</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let incident of incidents" app-incident [incident]="incident"></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-dark" (click)="open(content, -1)">New incident</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <app-incident-form (sortie)="updateValue($event);"></app-incident-form>
+</ng-template>
+
+
