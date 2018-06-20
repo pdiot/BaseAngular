@@ -19,7 +19,7 @@
           <th scope="col">Action</th>
           </thead>
           <tbody>
-            <tr *ngFor="let incident of incidents" app-incident [incident]="incident"></tr>
+            <tr *ngFor="let incident of incidents" app-incident [incident]="incident" (sortie)="updateValue($event)"></tr>
           </tbody>
         </table>
       </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {IncidentService} from '../incident.service';
 import {Incident} from '../incident';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -40,14 +40,26 @@ export class ListeIncidentComponent implements OnInit {
   }
 
   open(content, id: number): void {
-
-    this.modalRef = this.modalService.open(content);
+    if (id === -1) {
+      this.modalRef = this.modalService.open(content);
+    } else {
+      let inciToEdit;
+      this.incidentService.getIncident(id).subscribe(
+        inci => {
+          console.log('Fetched incident id : ' + inci.id);
+          inciToEdit = inci;
+        }
+      );
+    }
   }
 
   updateValue(event) {
     if (event === 'INSERTED') {
       this.ngOnInit();
       this.modalRef.close();
+    } else if (event.substr(0, 5) === 'EDIT_') {
+      const id = +event.substr(5);
+      this.open('content', id);
     }
   }
 

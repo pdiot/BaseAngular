@@ -4,16 +4,16 @@
 <td>{{incident.type}}</td>
 <td><ngb-progressbar type={{incident.progressType}} [value]="incident.progress" [striped]="true" [animated]="true"><i class="progression">{{incident.progress}}%</i></ngb-progressbar></td>
 
-<td *ngIf="incident.dateModification == null">Pas encore de modification</td>
-<td *ngIf="incident.dateModification != null">{{incident.dateModification.toLocaleDateString('fr-FR',
+<td *ngIf="incident.dateModification.getTime() == 0">Pas encore de modification</td>
+<td *ngIf="incident.dateModification.getTime() != 0">{{incident.dateModification.toLocaleDateString('fr-FR',
   { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}}</td>
-<td *ngIf="incident.dateCreation == null">Pas de création ? Ok.</td>
-<td *ngIf="incident.dateCreation != null">{{incident.dateCreation.toLocaleDateString('fr-FR',
+<td *ngIf="incident.dateCreation.getTime() == 0">Pas de création ? Ok.</td>
+<td *ngIf="incident.dateCreation.getTime() != 0">{{incident.dateCreation.toLocaleDateString('fr-FR',
   { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}}</td>
 <td>
   <div class="row">
     <div class="col">
-      <button type="button" class="btn btn-danger">Edit</button>
+      <button type="button" class="btn btn-danger" (click)="edit()">Edit</button>
       <a type="button" class="btn btn-info" href="/incident/{{incident.id}}">Details</a>
     </div>
   </div>

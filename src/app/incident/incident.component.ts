@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Incident} from '../incident';
 
 @Component({
@@ -10,9 +10,15 @@ export class IncidentComponent implements OnInit {
 
   @Input() incident: Incident;
 
+  @Output() sortie = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  edit() {
+    this.sortie.emit('EDIT_1');
   }
 
 }
