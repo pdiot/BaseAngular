@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {IncidentService} from '../incident.service';
 import {Incident} from '../incident';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -8,27 +8,52 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './liste-incident.component.html',
   styleUrls: ['./liste-incident.component.css']
 })
+
 export class ListeIncidentComponent implements OnInit {
 
   constructor(private incidentService: IncidentService, private modalService: NgbModal) { }
 
-  private incidents: Incident[];
+  @ViewChild('content') content;
+  private incidentsOuverts: Incident[];
+  private incidentsClos: Incident[];
   private modalRef;
+  private incidentToEdit: Incident;
 
   ngOnInit() {
-    this.incidents = new Array<Incident>();
-    this.incidentService.tmpGetIncident().subscribe(
+    this.incidentsOuverts = new Array<Incident>();
+    this.incidentService.getOpen().subscribe(
       incis => {
         const tmp = incis;
         console.log('Incident Service : fetched all incidents');
         for (const inci of tmp) {
-          this.incidents.push(new Incident(
+          this.incidentsOuverts.push(new Incident(
             inci.id,
             inci.dateCreation,
             inci.dateModification,
             inci.description,
             inci.email,
-            inci.is_open,
+            inci.open,
+            inci.level,
+            inci.progress,
+            inci.titre,
+            inci.type
+          ));
+        }
+      }
+    );
+    this.incidentsClos = new Array<Incident>();
+    this.incidentService.getClosed().subscribe(
+      incis => {
+        const tmp = incis;
+        console.log('Incident Service : fetched all incidents');
+        for (const inci of tmp) {
+          this.incidentsClos.push(new Incident(
+            inci.id,
+            inci.dateCreation,
+            inci.dateModification,
+            inci.description,
+            inci.email,
+            inci.open,
             inci.level,
             inci.progress,
             inci.titre,
@@ -41,13 +66,19 @@ export class ListeIncidentComponent implements OnInit {
 
   open(content, id: number): void {
     if (id === -1) {
-      this.modalRef = this.modalService.open(content);
+      this.modalRef = this.modalService.open(content).result.then((result) => {
+          console.log(`result :  ${result}`);
+        },
+        (reason) => {
+          console.log(`reason :  ${reason}`);
+          this.incidentToEdit = null;
+        });
     } else {
-      let inciToEdit;
       this.incidentService.getIncident(id).subscribe(
         inci => {
           console.log('Fetched incident id : ' + inci.id);
-          inciToEdit = inci;
+          this.incidentToEdit = inci;
+          this.modalRef = this.modalService.open(content);
         }
       );
     }
@@ -57,10 +88,22 @@ export class ListeIncidentComponent implements OnInit {
     if (event === 'INSERTED') {
       this.ngOnInit();
       this.modalRef.close();
+    } else if (event === 'UPDATED') {
+      this.incidentToEdit = null;
+      this.ngOnInit();
+      this.modalRef.close();
     } else if (event.substr(0, 5) === 'EDIT_') {
       const id = +event.substr(5);
-      this.open('content', id);
+      console.log('Callback : EDIT_' + id);
+      this.open(this.content, id);
+    } else if (event === 'UPDATEME') {
+      this.ngOnInit();
     }
+  }
+
+  // Exemple d'utilisation de <ng-content> dans le html pour interpréter du html au sein d'un component
+  edit(id: number): void {
+    this.open(this.content, id);
   }
 
 }

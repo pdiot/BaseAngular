@@ -8,7 +8,7 @@ export class Incident {
     public dateModification: Date,
     public description: string,
     public email: string,
-    public is_open: boolean,
+    public open: boolean,
     public level: number,
     public progress: number,
     public titre: string,

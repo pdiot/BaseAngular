@@ -3,11 +3,11 @@ import {Incident} from '../incident';
 import {IncidentService} from '../incident.service';
 
 @Component({
-  selector: '[app-incident]',
-  templateUrl: './incident.component.html',
-  styleUrls: ['./incident.component.css']
+  selector: '[app-incident-clos]',
+  templateUrl: './incident-clos.component.html',
+  styleUrls: ['./incident-clos.component.css']
 })
-export class IncidentComponent implements OnInit {
+export class IncidentClosComponent implements OnInit {
 
   @Input() incident: Incident;
 
@@ -18,12 +18,8 @@ export class IncidentComponent implements OnInit {
   ngOnInit() {
   }
 
-  edit() {
-    this.sortie.emit('EDIT_' + this.incident.id);
-  }
-
-  close() {
-    this.incident.open = true;
+  open() {
+    this.incident.open = false;
     this.incidentService.updateIncident(this.incident).subscribe(
       _ => this.sortie.emit('UPDATEME')
     );

@@ -1,39 +1,68 @@
 <div class="card">
-  <div class="card-header">
-    <div class="card-title">
-      <h2>Incidents</h2>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col">
-        <table class="table">
-          <thead>
-          <th scope="col">Id</th>
-          <th scope="col">Title</th>
-          <th scope="col">Level</th>
-          <th scope="col">Type</th>
-          <th scope="col">Progress</th>
-          <th scope="col">Updated on</th>
-          <th scope="col">Created on</th>
-          <th scope="col">Action</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let incident of incidents" app-incident [incident]="incident" (sortie)="updateValue($event)"></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button class="btn btn-dark" (click)="open(content, -1)">New incident</button>
-      </div>
-    </div>
-  </div>
+  <ngb-tabset>
+    <ngb-tab title="Incidents en cours">
+      <ng-template ngbTabContent>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <table class="table">
+                <thead>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Level</th>
+                <th scope="col">Type</th>
+                <th scope="col">Progress</th>
+                <th scope="col">Updated on</th>
+                <th scope="col">Created on</th>
+                <th scope="col">Action</th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let incident of incidentsOuverts" app-incident [incident]="incident" (sortie)="updateValue($event)"></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-dark" (click)="open(content, -1)">New incident</button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Incidents clos">
+      <ng-template ngbTabContent>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <table class="table">
+                <thead>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Level</th>
+                <th scope="col">Type</th>
+                <th scope="col">Progress</th>
+                <th scope="col">Updated on</th>
+                <th scope="col">Created on</th>
+                <th scope="col">Action</th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let incident of incidentsClos" app-incident-clos [incident]="incident" (sortie)="updateValue($event)">
+                  <!-- Exemple d'utilisation de <ng-content> dans le html pour interpréter du html au sein d'un component -->
+                  <button type="button" class="btn btn-danger" (click)="edit(incident.id)">Edit</button>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
 </div>
 
 <ng-template #content let-c="close" let-d="dismiss">
-  <app-incident-form (sortie)="updateValue($event);"></app-incident-form>
+  <app-incident-form (sortie)="updateValue($event);" [entree]="incidentToEdit"></app-incident-form>
 </ng-template>
 
 

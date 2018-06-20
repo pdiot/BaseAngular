@@ -18,6 +18,16 @@ export class IncidentService {
     return this.http.get<Incident[]>(this.incidentsUrl);
   }
 
+  getOpen(): Observable<Incident[]> {
+    const url = this.incidentsUrl + '/open';
+    return this.http.get<Incident[]>(url);
+  }
+
+  getClosed(): Observable<Incident[]> {
+    const url = this.incidentsUrl + '/closed';
+    return this.http.get<Incident[]>(url);
+  }
+
 /*
   getIncidents(): Observable<Incident[]> {
 

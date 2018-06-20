@@ -13,9 +13,10 @@
 <td>
   <div class="row">
     <div class="col">
-      <button type="button" class="btn btn-danger" (click)="edit()">Edit</button>
+      <!-- Exemple d'utilisation de <ng-content> dans le html pour interpréter du html au sein d'un component -->
+      <ng-content></ng-content>
       <a type="button" class="btn btn-info" href="/incident/{{incident.id}}">Details</a>
-      <button type="button" class="btn btn-warning" (click)="close()">Close</button>
+      <button type="button" class="btn btn-warning" (click)="open()">Open</button>
     </div>
   </div>
 </td>

@@ -9,6 +9,7 @@ import { IncidentFormComponent } from './incident-form/incident-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { IncidentDetailComponent } from './incident-detail/incident-detail.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
+import { IncidentClosComponent } from './incident-clos/incident-clos.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
     IncidentComponent,
     ListeIncidentComponent,
     IncidentFormComponent,
-    IncidentDetailComponent
+    IncidentDetailComponent,
+    IncidentClosComponent
   ],
   imports: [
     BrowserModule,
