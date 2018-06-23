@@ -1,0 +1,20 @@
+<table class="table">
+  <thead class="thead-light">
+    <th scope="col">Id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Age</th>
+    <th>Actions</th>
+  </thead>
+  <tr app-panda *ngFor="let myPanda of pandas" [panda]="myPanda">
+    <td>
+      <button class="btn btn-warning" (click)="edit(myPanda, content)">Edit</button>
+      <button class="btn btn-danger" (click)="remove(myPanda.id)">Delete</button>
+    </td>
+  </tr>
+</table>
+
+<button type="button" class="btn btn-dark" (click)="open(content)">Add</button>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <app-panda-form (sortie)="updateValue($event);" [entree]="pandaToEdit"></app-panda-form>
+</ng-template>

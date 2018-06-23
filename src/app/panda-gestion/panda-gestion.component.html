@@ -1,0 +1,11 @@
+<div class="card">
+  <ngb-tabset>
+    <ngb-tab  *ngFor="let cont of continents; let i = index" title={{cont}}>
+      <ng-template ngbTabContent>
+        <app-panda-list [continent]="i">
+          <button type="button" class="btn btn-dark">TODO</button>
+        </app-panda-list>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

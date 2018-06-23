@@ -1,0 +1,9 @@
+export enum Continent {
+  EUROPE = 0,
+  AMERIQUE_DU_NORD,
+  AMERIQUE_DU_SUD,
+  AFRIQUE,
+  ASIE,
+  OCEANIE,
+  ANTARCTIQUE
+}

@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title"><h2>{{formtitle}}</h2></div>
+  </div>
+  <div class="card-body">
+    <div *ngIf="!pandaForm.valid && formSubmitted">
+      <div class="affichageErreurs card text-white bg-danger mb-3">
+        <div class="card-body" *ngIf="pandaForm.controls['name'].hasError('required')"> Le nom du panda est obligatoire.</div>
+        <div class="card-body" *ngIf="pandaForm.controls['name'].hasError('minlength')"> Le nom du panda doit faire au moins 3 caractères.</div>
+      </div>
+      <div class="affichageErreurs card text-white bg-danger mb-3">
+        <div class="card-body" *ngIf="pandaForm.controls['age'].hasError('required')"> L'age est obligatoire.</div>
+      </div>
+      <div class="affichageErreurs card text-white bg-danger mb-3">
+        <div class="card-body" *ngIf="pandaForm.controls['continent'].hasError('required')"> Le continent est obligatoire.</div>
+      </div>
+    </div>
+    <form [formGroup]="pandaForm" (ngSubmit)="submitForm()">
+      <div style="visibility: hidden" class="form-group">
+        <input type="number" class="form-control" id="inputId" formControlName="id">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputName">Nom</label>
+          <input type="text" class="form-control" id="inputName" placeholder="Nom du petit panda mignon" formControlName="name">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputAge">Age</label>
+          <input type="number" class="form-control" id="inputAge" placeholder="Age du panda" formControlName="age">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md">
+          <label for="inputContinent">Continent d'origine</label>
+          <select type="number" class="form-control" id="inputContinent" placeholder="Continent d'origne" formControlName="continent">
+            <option value="0">Europe</option>
+            <option value="1">Amérique du Nord</option>
+            <option value="2">Amérique du Sud</option>
+            <option value="3">Afrique</option>
+            <option value="4">Asie</option>
+            <option value="5">Océanie</option>
+            <option value="6">Antarctique</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-dark">{{buttontext}}</button>
+    </form>
+  </div>
+</div>
+
+
